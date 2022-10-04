@@ -1,3 +1,5 @@
+import func as f
+'''
 from func import export_csv
 from func import buscar_inteligencia
 from func import filtrar_promedio
@@ -9,6 +11,7 @@ from func import mostrar_heroe_altura
 from func import mostrar_heroe_fuerza
 from func import mostrar_heroe
 from func import cargar_json
+'''
 '''
 1- Listar los primeros N héroes. El valor de N será ingresado por el usuario 
 (Validar que no supere max. de lista)
@@ -37,11 +40,11 @@ En todos los casos se deberá trabajar con una copia de la lista original
 '''
 
 
-lista_heroes = cargar_json("C:/Users/R5/Desktop/UTN/Programacion_I/Clase_10/data_stark.json")
+lista_heroes = f.cargar_json("C:/Users/R5/Desktop/UTN/Programacion_I/Clase_10/data_stark.json")
 
 #mostrar_heroe(lista_heroes)
 
-menu_heroes()
+f.menu_heroes()
 
 
 data = lista_heroes.copy()
@@ -56,17 +59,18 @@ while True:
         if n > len(lista_heroes):
             print("Error, usted quiere ver mas heroes de los que contiene la lista.")
         else:
-            data = mostrar_heroe(lista_heroes[:n])
+            data = f.mostrar_heroe(lista_heroes[:n])
+            
     elif respuesta == 2: #Ordenar y Listar héroes por altura.
         orden = input("Seleccione si quiere ver la lista de forma ascendente o descendente ('up' para descendente, 'down' para ascendente)")
         if orden == "up" or orden == "down":
-            data = mostrar_heroe_altura(heroes_sort(lista_heroes,"altura", orden))
+            data = f.mostrar_heroe_altura(f.heroes_sort(lista_heroes,"altura", orden))
         else:
             print("Error, reingrese una opcion correcta.")
     elif respuesta == 3: #Ordenar y Listar héroes por fuerza.
         orden = input("Seleccione si quiere ver la lista de forma ascendente o descendente ('up' para descendente, 'down' para ascendente)")
         if orden == "up" or orden == "down":
-            data = mostrar_heroe_fuerza(heroes_sort(lista_heroes,"fuerza", orden))
+            data = f.mostrar_heroe_fuerza(f.heroes_sort(lista_heroes,"fuerza", orden))
         else:
             print("Error, reingrese una opcion correcta.")
     elif respuesta == 4: #4- Calcular promedio de cualquier key numérica, filtrar los que cumplan con la condición de superar o no el promedio
@@ -80,24 +84,24 @@ while True:
             print("Error, ingresó un dato no válido.")
             orden = input("Seleccione si quiere ver quienes estan por encima del promedio ('mayor'),"
                           " o quienes estan por debajo del promedio ('menor')").lower()
-        lista_rta = filtrar_promedio(lista_heroes,clave,orden)
-        print("El promedio de" ,clave, " es de:" , calcular_promedio(lista_heroes,clave) ,
+        lista_rta = f.filtrar_promedio(lista_heroes,clave,orden)
+        print("El promedio de" ,clave, " es de:" , f.calcular_promedio(lista_heroes,clave) ,
               "\nQuienes cumplen con la condición", orden , "son:" ,lista_rta)
-        data = lista_rta
+        f.print_nombre_key(lista_rta,clave)
     elif respuesta == 5:
         seguir = "si"
         while seguir == "si":
             clave = input("Seleccione el nivel de inteligencia que desea ver: (good, average, high)").lower()
             if clave != "good" and clave != "average" and clave != "high":
                 print("Error, ingresó un dato no válido.")
-            buscar_inteligencia(lista_heroes,clave)
+            f.buscar_inteligencia(lista_heroes,clave)
             seguir = input("¿Desea seguir viendo datos? Si/No\n>").lower()
             if seguir != "si" and seguir == "no":
                 print("Usted ingresó 'No' o una respuesta inválida, se lo devolverá al menú.")
-        data = buscar_inteligencia(lista_heroes,clave)
-        
+        data = f.buscar_inteligencia(lista_heroes,clave)
+        #str.join()
     elif respuesta == 6:
-        export_csv(data,"Clase_10/data_stark.csv")
+        f.export_csv(data,"Clase_10/data_stark.csv")
     elif respuesta == 7:
         break
 

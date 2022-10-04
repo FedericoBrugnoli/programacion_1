@@ -43,13 +43,15 @@ def mostrar_heroe(lista:list):
     en caso de que no, la recorre e imprime por consola el heroe y su identidad.
 
     '''
-    
+    lista_rta=[]
     if len(lista) < 0:
         print("Error, la lista está vacía")
     else:
         for element in lista:
-            print("Heroe: {0} - Nombre: {1}".format(element["nombre"], element["identidad"]))
+            lista_rta.append(lista)
+            #print("Heroe: {0} - Nombre: {1}".format(element["nombre"], element["identidad"]))
 
+    return lista_rta
     
 
 
@@ -167,20 +169,24 @@ def filtrar_promedio(lista:list,key:str,orden:str) -> list:
     for elem in lista:
         if orden == "mayor" and elem[key] > promedio:
             lista_mayores.append(elem)
-            for elem in lista_mayores:
-                retorno = "Nombre: {0} -Atributo: {1}".format(elem["nombre"], elem[key])
+            retorno = lista_mayores
+            #for elem in lista_mayores:
+                #"Nombre: {0} -Atributo: {1}".format(elem["nombre"], elem[key])
         elif orden == "menor" and elem[key] < promedio:
             lista_menores.append(elem)
-            for elem in lista_menores:
-                retorno = "Nombre: {0} -Atributo: {1}".format(elem["nombre"], elem[key])
+            retorno = lista_menores
+            #for elem in lista_menores:
+                #"Nombre: {0} -Atributo: {1}".format(elem["nombre"], elem[key])
     
 
     return retorno
     
-
+def print_nombre_key(lista:list,key:str):
+    for elem in lista:
+        print('Nombre: {0} - {1}: {2}'.format(elem["nombre"],key,elem[key]))
     
 def buscar_inteligencia(lista:list,clave:str):
-
+    
     for elem in lista:
         match = re.search(clave,elem["inteligencia"],re.IGNORECASE)
         if match:
@@ -191,6 +197,8 @@ def buscar_inteligencia(lista:list,clave:str):
 
     
 def export_csv(lista:list,path:str):
+    #data = str(lista)
     with open (path,"w") as file:
-        file.write(lista)
+        for elem in lista:
+            file.write(f'{elem["nombre"]},{elem["identidad"]},{elem["altura"]},{elem["peso"]},{elem["fuerza"]},{elem["inteligencia"]}')
 
