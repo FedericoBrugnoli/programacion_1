@@ -11,12 +11,15 @@ import funciones
 def starwars_app():
 
     lista_personajes = funciones.cargar_json("Examen\data.json")
-    
+    lista_ej = lista_personajes.copy()
+    #print(lista_personajes)
     while(True):
         print("1 - Listar los personajes ordenados por altura\n2 - Mostrar el personaje mas alto de cada genero\n3 - Ordenar los personajes por peso\n4 - Armar un buscador de personajes\n5 - Exportar lista personajes a CSV\n6 - Salir\n")
         respuesta = input()
         if(respuesta=="1"):
-            print("1 - Listar los personajes ordenados por altura\n")
+            clave = input("clave")
+            lista_rta = funciones.mostrar(lista_ej[:],clave)
+            print(lista_rta)
         elif(respuesta=="2"):
             print("2 - Mostrar el personaje mas alto de cada genero\n")
         elif(respuesta=="3"):
